@@ -1,2 +1,2 @@
 rootProject.name = "BiblioAtacamaApp"
-include ':app'
+include ':biblioatacamaapp'
