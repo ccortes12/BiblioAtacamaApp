@@ -1,4 +1,4 @@
-# BiblioAtacama - Online book store <img alt="Java" src="https://img.shields.io/badge/Java-1.8-brightgreen"/>
+# BiblioAtacama - Online book store <img alt="Java" src="https://img.shields.io/badge/Java-11-brightgreen"/>
 
 ## Table of contents
   * [General Information](#general-information)
