@@ -1,4 +1,4 @@
-# BiblioAtacama - Online book store <img alt="Java" src="https://img.shields.io/badge/Java-11-brightgreen"/>
+# BiblioAtacama - Android App book store  <img alt="Java" src="https://img.shields.io/badge/Android%20Studio-4.2.2-green"/> <img alt="Java" src="https://img.shields.io/badge/Java-11-brightgreen"/>
 
 ## Table of contents
   * [General Information](#general-information)
