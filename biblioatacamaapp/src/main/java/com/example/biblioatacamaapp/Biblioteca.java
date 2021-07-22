@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,9 @@ import com.example.biblioatacamaapp.interfaces.APIInterface;
 import com.example.biblioatacamaapp.models.Libro;
 import com.example.biblioatacamaapp.models.User;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,7 +34,11 @@ import static android.content.ContentValues.TAG;
 public class Biblioteca extends AppCompatActivity {
 
     private List<Libro> listaLibros;
-    private User usuarioActivo;
+    private ListView listView;
+    private ArrayList<String> arrayList;
+    private ArrayAdapter<String> adapter;
+    private Integer userId;
+    private String username, nombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +49,16 @@ public class Biblioteca extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        getLibros();
+        TextView textViewTitulo = (TextView) findViewById(R.id.textViewTitulo);
+        listView = findViewById(R.id.listviewLibross);
 
-        //Integer userId = getIntent().getIntExtra("userId");
+        userId = getIntent().getIntExtra("userId",0);
+        username = getIntent().getStringExtra("username");
 
+        listaLibros = getLibros(userId);
+
+        textViewTitulo.setText("Hola " + username + " \n" +
+                "Aquí podras descargar tus libros");
     }
 
     @Override
@@ -81,7 +97,9 @@ public class Biblioteca extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getLibros(){
+    private List<Libro> getLibros(int userId){
+
+        List<Libro> salida = null;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.1.102:8080/")
@@ -90,7 +108,7 @@ public class Biblioteca extends AppCompatActivity {
 
         APIInterface apiInterface = retrofit.create(APIInterface.class);
 
-        Call<List<Libro>> call = apiInterface.getListaLibros();
+        Call<List<Libro>> call = apiInterface.getlistaLibrosComprados(userId);
 
         call.enqueue(new Callback<List<Libro>>() {
             @Override
@@ -100,20 +118,24 @@ public class Biblioteca extends AppCompatActivity {
                     Toast.makeText(Biblioteca.this,"ERROR " + response.code(),Toast.LENGTH_LONG);
                     return;
                 }
-
+                Log.d(TAG, "onResponse() de la wea de mierda");
                 List<Libro> list2 = response.body();
 
+                for(Libro libro: list2){
+                    listaLibros.add(libro);
+                    arrayList.add("ID : " + libro.getId() + " - Titulo: " + libro.getNombre());
+                }
 
             }
 
             @Override
             public void onFailure(Call<List<Libro>> call, Throwable t) {
-                Toast.makeText(Biblioteca.this,t.getMessage() ,Toast.LENGTH_LONG);
                 Log.d(TAG, "OnFailure()");
+                Log.d(TAG,t.getMessage());
             }
         });
 
 
-
+        return salida;
     }
 }

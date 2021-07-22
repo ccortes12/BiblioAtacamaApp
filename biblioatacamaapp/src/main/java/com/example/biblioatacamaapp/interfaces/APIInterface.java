@@ -19,4 +19,7 @@ public interface APIInterface {
     @FormUrlEncoded
     @POST("/app/login")
     Call<User> validarCredenciales(@Field("username") String username, @Field("password") String password);
+
+    @GET("/user/books")
+    Call<List<Libro>> getlistaLibrosComprados(@Query("userId") int userId);
 }

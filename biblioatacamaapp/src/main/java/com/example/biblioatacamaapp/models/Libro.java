@@ -4,33 +4,20 @@ import java.util.List;
 
 public class Libro {
 
-    private Integer id;
-
+    private int id;
     private List<Idioma> idioma;
-
     private List<Categoria> categorias;
-
     private String nombre;
-
     private String autor;
-
     private String editorial;
-
     private String isbn;
-
     private String sku;
-
-    private Integer precio;
-
-    private Integer stock;
-
+    private int precio;
+    private int stock;
     private String resenia;
-
     private String nombreImagen;
-
     private String nombreArchivo;
-
-    private Integer cantidadPag;
+    private int cantidadPag;
 
     public Libro() {
     }
@@ -52,11 +39,11 @@ public class Libro {
         this.cantidadPag = cantidadPag;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -116,19 +103,19 @@ public class Libro {
         this.sku = sku;
     }
 
-    public Integer getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Integer precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
-    public Integer getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(Integer stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
@@ -156,11 +143,11 @@ public class Libro {
         this.nombreArchivo = nombreArchivo;
     }
 
-    public Integer getCantidadPag() {
+    public int getCantidadPag() {
         return cantidadPag;
     }
 
-    public void setCantidadPag(Integer cantidadPag) {
+    public void setCantidadPag(int cantidadPag) {
         this.cantidadPag = cantidadPag;
     }
 }

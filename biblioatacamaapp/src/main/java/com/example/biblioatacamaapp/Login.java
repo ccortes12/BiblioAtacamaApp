@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.ContentValues.TAG;
 
-public class Login extends AppCompatActivity implements Serializable {
+public class Login extends AppCompatActivity {
 
     private User usuarioActual;
     private boolean pass = false;
@@ -49,23 +49,27 @@ public class Login extends AppCompatActivity implements Serializable {
                 String username = editTextUsername.getText().toString();
                 String password = editTextPw.getText().toString();
 
-                if(validarCredenciales(editTextUsername.getText().toString(),editTextPw.getText().toString())){
+                if(!username.equalsIgnoreCase("") && !password.equalsIgnoreCase("")){
+                    if(validarCredenciales(editTextUsername.getText().toString(),editTextPw.getText().toString())){
 
-                    Intent next = new Intent(v.getContext(), Biblioteca.class);
-                    next.putExtra("userId",usuarioActual.getId());
-                    next.putExtra("username",usuarioActual.getUsername());
-                    next.putExtra("password",usuarioActual.getPassword());
-                    next.putExtra("nombre",usuarioActual.getNombre());
-                    startActivity(next);
-                    finish();
+                        Intent next = new Intent(v.getContext(), Biblioteca.class);
+                        next.putExtra("userId",usuarioActual.getId());
+                        next.putExtra("username",usuarioActual.getUsername());
+                        next.putExtra("password",usuarioActual.getPassword());
+                        next.putExtra("nombre",usuarioActual.getNombre());
+                        startActivity(next);
+                        finish();
+                    }
                 }else{
-                    Toast.makeText(Login.this, "Error, credenciales incorrectas ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Error, complete ambos campos",Toast.LENGTH_LONG);
                 }
             }
         });
     }
 
     public boolean validarCredenciales(String username, String password){
+
+        boolean resp = false;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.1.102:8080/")
@@ -83,15 +87,15 @@ public class Login extends AppCompatActivity implements Serializable {
 
                 if(!response.isSuccessful()) {
                     Toast.makeText(Login.this,"Error en la solicitud " + response.message(),Toast.LENGTH_LONG);
-                    Log.d(TAG, "onResponse()");
                     return;
                 }
+                Log.d(TAG, "onResponse()");
                 usuarioActual = response.body();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(Login.this,t.getMessage(),Toast.LENGTH_LONG);
+                Toast.makeText(Login.this,"Error en la solicitud",Toast.LENGTH_LONG);
                 Log.d(TAG, "OnFailure()");
             }
         });

@@ -39,7 +39,7 @@
         android:id="@+id/layoutAgregarPaquete"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="55dp"
         android:background="@drawable/customborder"
         android:orientation="vertical"
         app:layout_constrainedHeight="@+id/guideline4"
@@ -64,13 +64,14 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        android:text="Tus libros"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/layoutAgregarPaquete"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline1" />
